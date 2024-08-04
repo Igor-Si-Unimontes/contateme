@@ -5,7 +5,7 @@ O objetivo do projeto é o usuario ter um controle de seus contatos telefonicos.
 
 ## Apresentação da Aplicação
 
-Assista ao vídeo de apresentação aqui: [Vídeo de Apresentação]((https://www.youtube.com/watch?v=pZ82Zlz8fNo))
+Assista ao vídeo de apresentação aqui: [Vídeo de Apresentação](https://www.youtube.com/watch?v=pZ82Zlz8fNo)
 
 ## Funcionalidades d Contateme
 
