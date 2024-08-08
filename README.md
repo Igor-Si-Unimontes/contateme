@@ -19,7 +19,7 @@ Assista ao vídeo de apresentação aqui: [Vídeo de Apresentação](https://www
 
 ## Tecnologias Utilizadas
 
-- Laravel 10
+- Laravel 9
 - MySQL 8.0
 - Vue.js
 - Bootstrap

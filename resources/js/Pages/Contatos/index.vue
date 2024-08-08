@@ -66,7 +66,7 @@ const openModalView = (contato) => {
         <template #header>
             <div class="container mx-auto mt-3 bg-white p-4">
                 <div class="flex justify-end mb-6">
-                    <button class="bg-gray-800 text-white py-2 px-4 text-base rounded hover:bg-gray-700 -ml-6 -mb-5" data-bs-toggle="modal" data-bs-target="#modalCreate">
+                    <button class="bg-gray-800 text-white py-2 px-4 text-base rounded hover:bg-gray-700 mr-4 -mb-5" data-bs-toggle="modal" data-bs-target="#modalCreate">
                         <i class="fa-solid fa-circle-plus"></i>
                          Criar
                     </button>
