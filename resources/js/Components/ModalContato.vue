@@ -30,10 +30,15 @@ const formatPhoneNumber = (number) => {
     }
 };
 
+const truncateName = (name) => {
+    return name.length > 60 ? name.slice(0, 60) + '...' : name;
+};
+
 const save = () => {
     if (form.telefone) {
         form.telefone = formatPhoneNumber(form.telefone);
     }
+    form.nome = truncateName(form.nome);
 
     const formData = new FormData();
     formData.append('id', form.id);
@@ -62,6 +67,7 @@ const update = () => {
     if (form.telefone) {
         form.telefone = formatPhoneNumber(form.telefone);
     }
+    form.nome = truncateName(form.nome);
 
     const formData = new FormData();
     formData.append('_method', 'PUT');
@@ -219,6 +225,10 @@ export default {
                                 :required="op === '1'"
                             />
                         </div>
+                        <div v-if="form.errors.imagem" class="text-sm text-danger">
+                            {{ form.errors.imagem }}
+                        </div>
+                        
                         <div v-if="imagePreview" class="mb-3">
                             <img :src="imagePreview" alt="Pré-visualização" class="img-fluid" />
                         </div>

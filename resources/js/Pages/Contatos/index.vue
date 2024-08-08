@@ -64,61 +64,53 @@ const openModalView = (contato) => {
     <Head title="Contatos"></Head>
     <AuthenticatedLayout>
         <template #header>
-            <div class="container-fluid mt-3 bg-white">
-                <div class="row mt-3">
-                    <div class="col-md-4 offset-md-4">
-                        <div class="d-grid mx-auto">
-                            <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#modalCreate">
-                                <i class="fa-solid fa-circle-plus"></i>
-                                Criar
-                            </button>
-                        </div>
-                    </div>
+            <div class="container mx-auto mt-3 bg-white p-4">
+                <div class="flex justify-end mb-6">
+                    <button class="bg-gray-800 text-white py-2 px-4 text-base rounded hover:bg-gray-700 -ml-6 -mb-5" data-bs-toggle="modal" data-bs-target="#modalCreate">
+                        <i class="fa-solid fa-circle-plus"></i>
+                         Criar
+                    </button>
                 </div>
-                <div class="row mt-3">
-                    <div class="col-md-10 offset-md-1">
-                        <div class="table-responsive">
-                            <table class="table table-stripeted table-bordered">
+                <div class="flex justify-center mt-6">
+                    <div class="w-full max-w-6xl">
+                        <div class="w-full">
+                            <table class="min-w-full bg-white border border-gray-200">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
-                                        <th>Telefone</th>
-                                        <th>Nome</th>
-                                        <th>E-mail</th>
-                                        <th>Imagem</th>
+                                        <th class="px-4 py-2 border text-center">#</th>
+                                        <th class="px-4 py-2 border text-center">Telefone</th>
+                                        <th class="px-4 py-2 border text-center">Nome</th>
+                                        <th class="px-4 py-2 border text-center">E-mail</th>
+                                        <th class="px-4 py-2 border text-center">Imagem</th>
+                                        <th class="px-4 py-2 border text-center">Ações</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr v-for="contato, i in contatos" :key="contato.id">
-                                        <td>{{ i+1 }}</td>
-                                        <td>{{ contato.telefone }}</td>
-                                        <td>{{ contato.nome }}</td>
-                                        <td>{{ contato.email }}</td>
-                                        <td>
+                                        <td class="px-4 py-2 border text-left">{{ i+1 }}</td>
+                                        <td class="px-4 py-2 border text-left">{{ contato.telefone }}</td>
+                                        <td class="px-4 py-2 border text-left">{{ contato.nome }}</td>
+                                        <td class="px-4 py-2 border text-left">{{ contato.email }}</td>
+                                        <td class="px-4 py-2 border text-center">
                                         <img 
                                             v-if="contato.imagem" 
                                             :src="`${contato.imagem}`" 
                                             alt="Imagem do Contato" 
-                                            class="img-thumbnail" 
-                                            style="width: 50px; height: 50px; object-fit: cover; border-radius: 50%;"
+                                            class="w-12 h-12 object-cover rounded-full mx-auto" 
                                         >
                                         <span v-else>Nenhuma imagem</span>
                                     </td>
-                                  <td>
-                                            <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalEdit" @click="openModal(contato)">
-                                                <i class="fa-solid fa-edit"></i>
-                                            </button>
-                                        </td>
-                                        <td>
-                                            <button class="btn btn-danger" @click="eliminar(contato.id,contato.telefone)">
-                                                <i class="fa-solid fa-trash"></i>
-                                            </button>  
-                                        </td>
-                                        <td>
-                                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalView" @click="openModalView(contato)">
+                                    <td class="px-4 py-2 flex justify-center items-center space-x-4">
+                                            <button class="bg-blue-600 text-white py-1 px-2 rounded hover:bg-blue-400" data-bs-toggle="modal" data-bs-target="#modalView" @click="openModalView(contato)">
                                                 <i class="fa-solid fa-eye"></i>
                                             </button>
-                                        </td>
+                                            <button class="bg-yellow-500 text-white py-1 px-2 rounded hover:bg-yellow-400" data-bs-toggle="modal" data-bs-target="#modalEdit" @click="openModal(contato)">
+                                                <i class="fa-solid fa-edit text-black"></i>
+                                            </button>
+                                            <button class="bg-red-600 text-white py-1 px-2 rounded hover:bg-red-400" @click="eliminar(contato.id,contato.telefone)">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </button>  
+                                    </td>                                            
                                     </tr>
                                 </tbody>
                             </table>

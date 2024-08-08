@@ -37,19 +37,24 @@ class ContatosController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'telefone' => 'required|min:14',
-            'nome' => 'required|string|max:100',
+            'nome' => 'required|string|max:60',
             'email' => 'required|email|max:100',
-            'imagem' => 'required|file|mimes:jpeg,png,jpg|max:2048', 
+            'imagem' => 'required|file|mimes:jpeg,png,jpg,webp|max:2048', 
         ]);
+        $nomeTruncado = strlen($validatedData['nome']) > 60 
+        ? substr($validatedData['nome'], 0, 60) . '...' 
+        : $validatedData['nome'];
+
 
         $imagem = null;
         if ($request->hasFile('imagem')) {
             $imagem = $request->file('imagem')->store('contatos', 'public');
         }
 
-        $contato = new Contatos($request->except('imagem'));
+        $contato = new Contatos($validatedData);
+        $contato->nome = $nomeTruncado;
         $contato->imagem = $imagem;
         $contato->save();
 
@@ -88,20 +93,20 @@ class ContatosController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Contatos $contato)
-{
-    if ($request->hasFile('imagem')) {
-        if ($contato->imagem) {
-            Storage::disk('public')->delete($contato->imagem);
+    {
+        if ($request->hasFile('imagem')) {
+            if ($contato->imagem) {
+                Storage::disk('public')->delete($contato->imagem);
+            }
+            $imagem = $request->file('imagem')->store('contatos', 'public');
+        } else {
+            $imagem = $contato->imagem;
         }
-        $imagem = $request->file('imagem')->store('contatos', 'public');
-    } else {
-        $imagem = $contato->imagem;
+
+        $contato->update($request->except('imagem') + ['imagem' => $imagem]);
+
+        return redirect()->route('contato.index')->with('success', 'Contato atualizado com sucesso!');
     }
-
-    $contato->update($request->except('imagem') + ['imagem' => $imagem]);
-
-    return redirect()->route('contato.index')->with('success', 'Contato atualizado com sucesso!');
-}
     
     
     
